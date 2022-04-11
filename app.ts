@@ -9,11 +9,20 @@ const guessField = document.querySelector(".guessField") as HTMLInputElement;
 const resetParas = document.querySelectorAll(".resultParas p");
 
 //checkGuess() and setGameOver() components
+
+interface Guesses {
+  tries: number;
+  wins: number;
+  guesses: [];
+}
+
 let guessCount: number;
 let randomNumber: number;
 let resetButton: HTMLElement;
 let guessesObj = {
   tries: 0,
+  wins: 0,
+  guesses: [],
 };
 
 //Initial state. Runs at startup and at reset
@@ -34,6 +43,7 @@ begin();
 
 const checkGuess = () => {
   const userGuess = Number(guessField.value); //Turn input into number
+
   //If guessCount is equal to one show previous guesses?
   if (guessCount === 1) {
     guesses.textContent = "Previous guesses: ";
@@ -47,6 +57,7 @@ const checkGuess = () => {
     lastResult.textContent = "Congratulations! You got it right!";
     lastResult.style.backgroundColor = "green";
     lowOrHi.textContent = "";
+    guessesObj.wins += 1;
     return setGameOver();
   }
 
@@ -71,8 +82,6 @@ const checkGuess = () => {
 };
 guessSubmit.addEventListener("click", checkGuess);
 
-guessesObj.tries += 1; //Increment guesses in object ?
-
 //GameOver state will disable input fields, create reset button and append it to ??? with ??? classes
 const setGameOver = () => {
   guessField.disabled = true;
@@ -81,4 +90,5 @@ const setGameOver = () => {
   resetButton.textContent = "Start new game";
   document.body.appendChild(resetButton);
   resetButton.addEventListener("click", begin);
+  guessesObj.tries += 1; //Increment guesses in object ?
 };

@@ -1,21 +1,23 @@
+"use strict";
 //Selectors
-var guesses = document.querySelector("#guesses");
-var lastResult = document.querySelector(".lastResult");
-var lowOrHi = document.querySelector(".lowOrHi");
-var guessSubmit = document.querySelector(".guessSubmit");
-var guessField = document.querySelector(".guessField");
-var resetParas = document.querySelectorAll(".resultParas p");
-//checkGuess() and setGameOver() components
-var guessCount;
-var randomNumber;
-var resetButton;
-var guessesObj = {
-    tries: 0
+const guesses = document.querySelector("#guesses");
+const lastResult = document.querySelector(".lastResult");
+const lowOrHi = document.querySelector(".lowOrHi");
+const guessSubmit = document.querySelector(".guessSubmit");
+const guessField = document.querySelector(".guessField");
+const resetParas = document.querySelectorAll(".resultParas p");
+let guessCount;
+let randomNumber;
+let resetButton;
+let guessesObj = {
+    tries: 0,
+    wins: 0,
+    guesses: [],
 };
 //Initial state. Runs at startup and at reset
-var begin = function () {
+const begin = () => {
     guessCount = 1;
-    resetParas.forEach(function (elem) { return (elem.textContent = ""); });
+    resetParas.forEach((elem) => (elem.textContent = ""));
     resetButton === null || resetButton === void 0 ? void 0 : resetButton.remove();
     guessField.disabled = false;
     guessSubmit.disabled = false;
@@ -27,8 +29,8 @@ var begin = function () {
     console.log(randomNumber);
 };
 begin();
-var checkGuess = function () {
-    var userGuess = Number(guessField.value); //Turn input into number
+const checkGuess = () => {
+    const userGuess = Number(guessField.value); //Turn input into number
     //If guessCount is equal to one show previous guesses?
     if (guessCount === 1) {
         guesses.textContent = "Previous guesses: ";
@@ -41,6 +43,7 @@ var checkGuess = function () {
         lastResult.textContent = "Congratulations! You got it right!";
         lastResult.style.backgroundColor = "green";
         lowOrHi.textContent = "";
+        guessesObj.wins += 1;
         return setGameOver();
     }
     //Loss condition. Should return setGameOver()?
@@ -62,13 +65,14 @@ var checkGuess = function () {
     guessField.focus();
 };
 guessSubmit.addEventListener("click", checkGuess);
-guessesObj.tries += 1; //Increment guesses in object ?
 //GameOver state will disable input fields, create reset button and append it to ??? with ??? classes
-var setGameOver = function () {
+const setGameOver = () => {
     guessField.disabled = true;
     guessSubmit.disabled = true;
     resetButton = document.createElement("button");
     resetButton.textContent = "Start new game";
     document.body.appendChild(resetButton);
     resetButton.addEventListener("click", begin);
+    guessesObj.tries += 1; //Increment guesses in object ?
 };
+//# sourceMappingURL=app.js.map
