@@ -74,5 +74,6 @@ const setGameOver = () => {
     document.body.appendChild(resetButton);
     resetButton.addEventListener("click", begin);
     guessesObj.tries += 1; //Increment guesses in object ?
+    guessesObj.guesses.push(randomNumber);
 };
 //# sourceMappingURL=app.js.map

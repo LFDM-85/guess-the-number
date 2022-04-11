@@ -13,7 +13,7 @@ const resetParas = document.querySelectorAll(".resultParas p");
 interface Guesses {
   tries: number;
   wins: number;
-  guesses: [];
+  guesses: number[];
 }
 
 let guessCount: number;
@@ -58,6 +58,7 @@ const checkGuess = () => {
     lastResult.style.backgroundColor = "green";
     lowOrHi.textContent = "";
     guessesObj.wins += 1;
+
     return setGameOver();
   }
 
@@ -91,4 +92,5 @@ const setGameOver = () => {
   document.body.appendChild(resetButton);
   resetButton.addEventListener("click", begin);
   guessesObj.tries += 1; //Increment guesses in object ?
+  guessesObj.guesses.push(randomNumber);
 };
