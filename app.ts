@@ -1,7 +1,3 @@
-//Store random number in variable
-let randomNumber = Math.floor(Math.random() * 100) + 1;
-console.log(randomNumber);
-
 //Selectors
 const guesses = document.querySelector("#guesses") as HTMLParagraphElement;
 const lastResult = document.querySelector(
@@ -10,13 +6,31 @@ const lastResult = document.querySelector(
 const lowOrHi = document.querySelector(".lowOrHi") as HTMLParagraphElement;
 const guessSubmit = document.querySelector(".guessSubmit") as HTMLInputElement;
 const guessField = document.querySelector(".guessField") as HTMLInputElement;
+const resetParas = document.querySelectorAll(".resultParas p");
 
 //checkGuess() and setGameOver() components
-let guessCount = 1;
+let guessCount: number;
+let randomNumber: number;
 let resetButton: HTMLElement;
 let guessesObj = {
   tries: 0,
 };
+
+//Initial state. Runs at startup and at reset
+const begin = () => {
+  guessCount = 1;
+  resetParas.forEach((elem) => (elem.textContent = ""));
+  resetButton?.remove();
+  guessField.disabled = false;
+  guessSubmit.disabled = false;
+  guessField.value = "";
+  guessField.focus();
+  // guessesObj = {}; -> a definir
+  lastResult.style.backgroundColor = "white";
+  randomNumber = Math.floor(Math.random() * 100) + 1;
+  console.log(randomNumber);
+};
+begin();
 
 const checkGuess = () => {
   const userGuess = Number(guessField.value); //Turn input into number
@@ -66,22 +80,5 @@ const setGameOver = () => {
   resetButton = document.createElement("button");
   resetButton.textContent = "Start new game";
   document.body.appendChild(resetButton);
-
-  //resetGame() will select result parameters by class, clear their text fields, remove reset button and set variables to initial values ?
-  const resetGame = () => {
-    const resetParas = document.querySelectorAll(".resultParas p");
-    for (const resetPara of resetParas) {
-      resetPara.textContent = "";
-    }
-    resetButton.remove();
-    guessField.disabled = false;
-    guessSubmit.disabled = false;
-    guessField.value = "";
-    guessField.focus();
-    // guessesObj = {}; -> a definir
-    lastResult.style.backgroundColor = "white";
-    randomNumber = Math.floor(Math.random() * 100) + 1;
-    checkGuess();
-  };
-  resetButton.addEventListener("click", resetGame);
+  resetButton.addEventListener("click", begin);
 };
