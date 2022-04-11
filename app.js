@@ -75,3 +75,4 @@ const setGameOver = () => {
     };
     resetButton.addEventListener("click", resetGame);
 };
+//# sourceMappingURL=app.js.map
