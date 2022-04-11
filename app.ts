@@ -19,7 +19,7 @@ interface Guesses {
 let guessCount: number;
 let randomNumber: number;
 let resetButton: HTMLElement;
-let guessesObj = {
+let guessesObj: Guesses = {
   tries: 0,
   wins: 0,
   guesses: [],
