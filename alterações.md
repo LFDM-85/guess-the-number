@@ -1,5 +1,7 @@
 ## Gonçalo
 
+> mover o script para o head do HTML
+
 ## Luís
 
 > linha 11 let resetButton : as HTLMElement
