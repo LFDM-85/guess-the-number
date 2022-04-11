@@ -3,11 +3,13 @@ let randomNumber = Math.floor(Math.random() * 100) + 1;
 console.log(randomNumber);
 
 //Selectors
-const guesses = document.querySelector(".guesses");
-const lastResult = document.querySelector(".lastResult");
-const lowOrHi = document.querySelector("lowOrHi");
-const guessSubmit = document.querySelector(".guessSubmit");
-const guessField = document.querySelector(".guessField");
+const guesses = document.querySelector("#guesses") as HTMLParagraphElement;
+const lastResult = document.querySelector(
+  ".lastResult"
+) as HTMLParagraphElement;
+const lowOrHi = document.querySelector(".lowOrHi") as HTMLParagraphElement;
+const guessSubmit = document.querySelector(".guessSubmit") as HTMLInputElement;
+const guessField = document.querySelector(".guessField") as HTMLInputElement;
 
 //checkGuess() and setGameOver() components
 let guessCount = 1;
@@ -36,7 +38,6 @@ const checkGuess = () => {
   if (guessCount === "3") {
     lastResult.textContent = "!!!GAME OVER!!!";
     return;
-    setGameOver();
   }
 
   //Else conditions. Used if user input was never the correct answer or guess count is still below 3.
