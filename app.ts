@@ -13,9 +13,9 @@ const guessField = document.querySelector(".guessField") as HTMLInputElement;
 
 //checkGuess() and setGameOver() components
 let guessCount = 1;
-let resetButton;
+let resetButton: HTMLElement;
 let guessesObj = {
-  Tries: 0,
+  tries: 0,
 };
 
 const checkGuess = () => {
@@ -24,10 +24,12 @@ const checkGuess = () => {
   if (guessCount === 1) {
     guesses.textContent = "Previous guesses: ";
   }
-  guesses.textContent += userGuess + " "; //Increment last user guess to text field
+  guessCount++;
+  guesses.textContent += userGuess + ", "; //Increment last user guess to text field
 
   //Win condition. Returns setGameOver() state
-  if ((userGuess = randomNumber)) {
+  if (userGuess === randomNumber) {
+    // só um = era definir que userGuess seria o mesmo que randomNumber
     lastResult.textContent = "Congratulations! You got it right!";
     lastResult.style.backgroundColor = "green";
     lowOrHi.textContent = "";
@@ -35,9 +37,9 @@ const checkGuess = () => {
   }
 
   //Loss condition. Should return setGameOver()?
-  if (guessCount === "3") {
+  if (guessCount > 3) {
     lastResult.textContent = "!!!GAME OVER!!!";
-    return;
+    return setGameOver();
   }
 
   //Else conditions. Used if user input was never the correct answer or guess count is still below 3.
@@ -53,7 +55,7 @@ const checkGuess = () => {
   guessField.value = "";
   guessField.focus();
 };
-guessSubmit.addeventListener("click", checkGuess);
+guessSubmit.addEventListener("click", checkGuess);
 
 guessesObj.tries += 1; //Increment guesses in object ?
 
@@ -76,8 +78,10 @@ const setGameOver = () => {
     guessSubmit.disabled = false;
     guessField.value = "";
     guessField.focus();
-    guessesObj = {};
+    // guessesObj = {}; -> a definir
     lastResult.style.backgroundColor = "white";
-    randomNumber = Math.floor(Math.random()) + 1;
+    randomNumber = Math.floor(Math.random() * 100) + 1;
+    checkGuess();
   };
+  resetButton.addEventListener("click", resetGame);
 };

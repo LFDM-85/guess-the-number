@@ -14,3 +14,7 @@
 > > Nos selectores é preciso definir como HTML(qualquer coisa) -> ja alterei no ficheiro
 > > no primeiro selector guesses é um id logo tem de ser #guesses e não .guesses
 > > loworHi é .loworHi...como está só define texto
+
+> let resetButton: HTMLElement
+
+> let guesssesObj temos de definir uma interface para termos o objecto(acho eu) e o tries está com letra grande;
